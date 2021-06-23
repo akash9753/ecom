@@ -1,3 +1,6 @@
+import { CategoryService } from './../../category/category.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from './../product.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +10,47 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductAddComponent implements OnInit {
 
-  constructor() { }
+  title = ''
+  description = ''
+  price = ''
+  category = ''
+  categories = []
+constructor(
+  private productService: ProductService,
+  private service : CategoryService,
+  private activeModal : NgbActiveModal
+) { }
 
-  ngOnInit(): void {
-  }
+ngOnInit(): void {
+  this.loadCategories()
+}
+
+loadCategories(){
+  this.service
+  .getCategories()
+  .subscribe(response =>{
+    if(response['status'] == 'success'){
+      this.categories = response['data']
+    }else{
+      alert(response['error'])
+    }
+  })
+}
+
+onSave(){
+    this.productService
+    .createProduct(this.title, this.description, this.price, this.category)
+    .subscribe(response =>{
+      if(response['status'] == 'success'){
+           this.activeModal.dismiss('ok')
+      }else{
+        alert(response['error'])
+      }
+    })
+}
+
+onCancel(){
+   this.activeModal.dismiss('ok')
+}
 
 }

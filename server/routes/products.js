@@ -51,7 +51,7 @@ router.put('/:id',(request, response)=>{
 router.delete('/:id',(request, response)=>{
     const {id} = request.params
     
-    product
+    Product
     .findOne({_id:id})
     .exec((error,product)=>{
         if(error){
