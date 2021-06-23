@@ -22,8 +22,9 @@
        <td>{{product.price}}</td>
        <td>{{product.category.title}}</td>
        <td>
-           <button (click)="onDelete(product)"class="btn btn-sm btn-danger">delete</button>
-           <button style="margin-left: 10px;"(click)="onDelete(category)"class="btn btn-sm btn-warning">Edit</button>
+           
+           <button style="margin-left: 10px;" class="btn btn-sm btn-warning">Edit</button>
+           <button style="margin-left: 10px;" (click)="onDelete(product)"class="btn btn-sm btn-danger">delete</button>
        </td>
      </tr>
 

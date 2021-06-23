@@ -7,6 +7,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductAddComponent } from './product-add/product-add.component';
 
 
+
 @NgModule({
   declarations: [ProductListComponent, ProductAddComponent],
   imports: [

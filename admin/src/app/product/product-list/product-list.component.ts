@@ -1,3 +1,4 @@
+
 import { ProductService } from './../product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
@@ -37,6 +38,9 @@ export class ProductListComponent implements OnInit {
        this.loadProducts()
     })
     }
+
+   
+
     onDelete(product){
       this.service
       .deleteProduct(product._id)
