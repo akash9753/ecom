@@ -1,7 +1,37 @@
 const express = require ('express')
 const Product = require('../models/product')
 const utils = require('../utils')
+console.log('multer')
+const multer = require('multer')
+const upload = multer({dest: 'images/'})
+
+
 const router = express.Router()
+
+
+router.post("/upload-image/:id", upload.single("image"), (request, response)=>{
+    console.log('inside post upload ')
+    const {id} = request.params
+    console.log(`id': ${id}`)
+   // response.send({status:"success"})
+    Product
+    .findOne({_id:id, deleted: false})
+    .exec((error,product)=>{
+      if(error){
+           response.send(utils.createResult(error,null))
+        }else if(!product){
+           response.send(utils.createResult('product not found',null)) 
+        }else{
+            
+            product.image = request.file.filename
+           
+            product.save((error, product)=>{
+        response.send(utils.createResult(error,product))
+   })
+    }
+ })
+})
+
 
 router.post('/',(request, response)=>{
     const {title , description, category, price} = request.body
@@ -11,6 +41,7 @@ router.post('/',(request, response)=>{
     product.description = description
     product.category = category
     product.price = price
+    
     product.save((error, product)=>{
         response.send(utils.createResult(error,product))
     })
@@ -34,7 +65,7 @@ router.put('/:id',(request, response)=>{
     .exec((error,product)=>{
         if(error){
             response.send(utils.createResult(error,null))
-        }else if(!category){
+        }else if(!product){
             response.send(utils.createResult('product not found',null)) 
         }else{
             product.title = title

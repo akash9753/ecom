@@ -27,9 +27,9 @@ app.use((request, response, next)=>{
             response.send(utils.createResult('unauthorized not token'))
             return
         }
-        console.log('checking token...')
+        //console.log('checking token...')
         const payload = jwt.verify(token, config.secret)
-        console.log(`payload: ${payload}`)
+        //console.log(`payload: ${payload}`)
         request.userId = payload.userid
         next()
     }catch (ex){

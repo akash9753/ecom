@@ -1,0 +1,19 @@
+<div class="modal-header">
+     <h4>Upload Image</h4>
+
+</div>
+
+<div class="modal-body">
+    <h5>Title : {{product.title}}</h5>
+    <div class="form-group">
+        <label for="Select Image"></label>
+        <input (change)="onImageSelected($event)" class="form-control" type="file">
+        
+    </div>
+</div>
+
+
+<div class="modal-footer">
+   <button (click)="onUpload()" class="btn btn-success">Upload</button>
+   <button (click)="onCancel()" class="btn btn-danger">Cancel</button>
+</div>

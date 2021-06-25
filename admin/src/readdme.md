@@ -38,3 +38,15 @@ user cant go directly home page
 *00:14:00*
 ng g c product/upload-image --skip-tests
 
+(click)="onUpload()"
+(click)="onCancel()" 
+
+selectedImage: any
+
+.subscribe(response =>{
+        if(response['status'] == 'success'){
+          this.loadProducts()
+        }else{
+          alert(response['error'])
+        }
+     }); 

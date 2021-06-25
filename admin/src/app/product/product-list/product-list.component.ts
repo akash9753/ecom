@@ -1,3 +1,4 @@
+import { UploadImageComponent } from './../upload-image/upload-image.component';
 
 import { ProductService } from './../product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -38,7 +39,11 @@ export class ProductListComponent implements OnInit {
        this.loadProducts()
     })
     }
-
+    onUploadImage(product){
+      const ref = this.modalService.open(UploadImageComponent)
+      const component = ref.componentInstance as UploadImageComponent
+      component.product = product
+    }
    
 
     onDelete(product){
@@ -50,7 +55,7 @@ export class ProductListComponent implements OnInit {
         }else{
           alert(response['error'])
         }
-     }) 
+     }); 
     }
 
 }
